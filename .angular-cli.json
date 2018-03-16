@@ -1,0 +1,41 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "dinnerplanner-html-angular"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": []
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    }
+  }
+}

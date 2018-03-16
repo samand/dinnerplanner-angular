@@ -1,0 +1,14 @@
+<h3>Dishes</h3>
+<ul>
+  <div *ngIf="dishes">
+    <li *ngFor="let dish of dishes">
+      {{dish.title}}
+    </li>
+  </div>
+  <div *ngIf="status == 'INITIAL'">
+    <em>Loading...</em>
+  </div>
+  <div *ngIf="status == 'ERROR'">
+    <b>Failed to load data, plese try again</b>
+  </div>
+</ul>
