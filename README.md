@@ -18,7 +18,7 @@ bellow to install all the neded dependencies (e.g. the framework libraries) and 
 3. Run `npm start` through the terminal. This will start the webserver and the application should pop up in your
    browser ready for use. Alternatively you can open in through [http://localhost:4200]. Whenever you make changes in your code and save, the browser will update automatically, so you don't have to click refresh anymore.
 
-## Understanding the startup code
+## Understanding the startup code 
 
 * `src/index.html` - this is the static html file, and as opposed to previous labs, we don't put view's HTML here. It should only contain HTML that's shared among all the views (e.g. header, footer)
 * `src/data/dinner.service.js` - example of dinner model with number of guests, getAllDishes function implemented using Angular's [HttpClient](https://angular.io/guide/http) and [Observables](https://angular.io/guide/observables) pattern. You can copy other functions from your original model (and modify as needed to make it work with TypeScript)

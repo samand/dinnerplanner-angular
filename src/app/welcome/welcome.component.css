@@ -1,0 +1,10 @@
+#welcomeButton {
+    margin-left: 40%;
+    width: 20%;
+    background-color: azure;
+}
+
+#welcomeText {
+    margin-left: 10%;
+    margin-right: 10%;
+}

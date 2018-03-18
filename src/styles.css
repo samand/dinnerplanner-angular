@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: bisque;
+}
+
+.jumbotron{
+    background-color: azure;
+}
+
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: azure;
+}
