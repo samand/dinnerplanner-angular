@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-sm-6 col-xs-12">
+		<div>
+			<h2>{{dinnerService.currentDish.title}} </h2>
+			<img src='{{dinnerService.currentDish.image}}'>
+			<p>{{dinnerService.currentDish.description}}</p>
+			<button routerLink='/search'>Back to search</button>
+			<button (click)='addOrRemove()'>{{addOrRemoveText}} </button>
+		</div>
+	</div>
+</div>

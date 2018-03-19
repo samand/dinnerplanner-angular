@@ -9,8 +9,11 @@ import { AppRoutingModule } from './/app-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SelectDishComponent } from './select-dish/select-dish.component';
 import { DishesComponent } from './dishes/dishes.component';
+import { DishDetailsComponent } from './dish-details/dish-details.component';
+import { DishDescriptionComponent } from './dish-description/dish-description.component';
 import { DinnerService } from './dinner.service';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -20,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     WelcomeComponent,
     SelectDishComponent,
     DishesComponent,
+    DishDetailsComponent,
+    DishDescriptionComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,8 +7,8 @@
     if you want more control and data validation, you should still use instead
     the event handlers, e.g. (keyup)="setNumberOfGuests"
   -->
-    People:
-    <input [(ngModel)]="dinnerService.numberOfGuests" />
+    How many people needs feeding?
+    <input type="number" [(ngModel)]="dinnerService.numberOfGuests" (change)="newNumberOfGuests()">
     <br> Total number of guests: {{dinnerService.numberOfGuests}}
   </p>
 </div>

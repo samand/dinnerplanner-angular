@@ -6,13 +6,14 @@
 <button (click)="search()" >Search</button>
 
 <ul>
-	<div *ngIf="dishes">
-		<li *ngFor="let dish of dishes">
-			{{dish.title}}
-		</li>
+	<div *ngIf="dishes" class="row">
+		<div *ngFor="let dish of dishes" class="col-xs-6 col-md-4 border" (click)="clickedDish(dish.id)" routerLink='/details'>
+			<h5>{{dish.title}}</h5>
+			<img src='{{"https://spoonacular.com/recipeImages/".concat(dish.id).concat("-240x150.jpg")}}' height="120" style="position:relative; bottom:5px;" >
+		</div>
 	</div>
 	<div *ngIf="status == 'INITIAL'">
-		<em>Loading...</em>
+		<em>Search for a dish! You'll probably find something yummy...</em>
 	</div>
 	<div *ngIf="status == 'ERROR'">
 		<b>Failed to load data, plese try again</b>
