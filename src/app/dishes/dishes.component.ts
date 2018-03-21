@@ -45,10 +45,8 @@ export class DishesComponent implements OnInit {
 	textChanged(event){
 		this.searchText = event.target.value;
 	}
-	search() {
-		this.getDishes();
-	}
-	getDishes(): void {
+
+	search(): void {
 		// when data is retrieved we update the component property 
 		// this will cause the component to re-render
 		this.dinnerService.getAllDishes(this.searchType,this.searchText).subscribe(dishes => {
@@ -60,23 +58,8 @@ export class DishesComponent implements OnInit {
 	}
 
 
-
 	//CHOOSE A DISH
 	clickedDish(dishId){
 		this.dinnerService.newCurrentDish(dishId);
-		/*
-		this.dinnerService.getDishDetails(dishId).subscribe(data => {
-			console.log("well, something was returned")
-			console.log(data.id)
-			console.log(data.title)
-			console.log(data.image)
-			console.log(data.instructions)
-			console.log(data.extendedIngredients)
-		}, error => {
-			this.status = 'ERROR'
-			console.log("error error error")
-		});
-		*/
 	}
-
 }

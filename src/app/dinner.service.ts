@@ -13,65 +13,96 @@ const apiKey = 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB';
 
 @Injectable()
 export class DinnerService {
-
 	constructor(private http: HttpClient) { }
-
-	numberOfGuests: number = 0;
-	dishSearchType: string = "";
-	dishSearchText: string = "";
-	currentDish: Dish = {
+	numberOfGuests: number = 4;
+	currentDishId: number = 0;
+	menu = [];
+	menuIds = [];
+/*
+	//currentDishDetails: Dish = {
 		id: 0,
-		title: "thetitle",
-		type: "",
+		title: "",
 		image: "",
 		description: "",
 		ingredients: []
 	};
-	menu = [];
-	menuIds = [];
-	currentDishInMenu: boolean = false;
+*/
 
+
+	/*
+	NUMBER OF GUESTS
+	*/
 
 	setNumberOfGuests(newNumberOfGuests) {
 		this.numberOfGuests = newNumberOfGuests;
 	}
 
-	addDish() {
-		if (this.currentDishInMenu) {
+	/*
+	CURRENT DISH
+	*/
+
+	newCurrentDish(dishId){
+		this.currentDishId = dishId;
+	}
+
+	isDishInMenu(dishId){
+		if (this.menuIds.includes(dishId)){
+			return true;
+		}
+		else{return false;}
+	}
+
+	getDishDetails(dishId) {
+		let httpOptions = { headers: new HttpHeaders({ 'X-Mashape-Key': apiKey }) }
+		let details_url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/".concat(dishId).concat("/information");
+		return this.http.get<any>(details_url, httpOptions)
+			.pipe(
+				catchError(this.handleError('getDishDetails()'))
+			);
+	}
+
+	/*
+	MENU
+	*/
+
+	addDish(dishDetails) {
+		if (this.isDishInMenu(dishDetails.id)) {
 			console.log("Can't add to menu. Dish already in menu. ")
 		}
 		else {
 			let newDish = {
-				id: this.currentDish.id,
-				title: this.currentDish.title,
-				image: this.currentDish.image,
-				description: this.currentDish.description,
-				ingredients: this.currentDish.ingredients
+				id: dishDetails.id,
+				title: dishDetails.title,
+				image: dishDetails.image,
+				description: dishDetails.description,
+				ingredients: dishDetails.ingredients,
+				price: dishDetails.price
 			};
-			this.menuIds.push(newDish.id)
+			this.menuIds.push(dishDetails.id)
 			this.menu.push(newDish);
-			this.currentDishInMenu = true;
 			console.log("Dish wasn't in the menu. Added dish to menu. ");
 		}
 	}
 
-	removeDish() {
-		let key: any;
-		if (this.currentDishInMenu) {
+	removeDish(dishId) {
+		let key: any; //Iterator. Although it is parsed as a string at first, JS converts to number when needed. 
+		if (this.isDishInMenu(dishId)) {
 			for (key in this.menu) {
-				if (this.menu[key].id == this.currentDish.id) {
-					console.log("type of key: ", typeof(key));
+				if (this.menu[key].id == dishId) {
 					this.menu.splice(key,1);
 				}
 			}
-			this.menuIds.splice(this.menuIds.indexOf(this.currentDish.id), 1);
+			this.menuIds.splice(this.menuIds.indexOf(dishId), 1);
 		}
 		else {
 			console.log("Dish was not in menu. No dish was removed.");
 		}
 	}
 
-	// API Calls
+
+	/*
+	SEARCH
+	*/
 
 	getAllDishes(type, text): Observable<Dish[]> {
 		let httpOptions = { headers: new HttpHeaders({ 'X-Mashape-Key': apiKey }), params: { 'type': type, 'query': text } };
@@ -82,48 +113,6 @@ export class DinnerService {
 				catchError(this.handleError('getAllDishes()'))
 			);
 	}
-
-	newCurrentDish(id) {
-		if (!(this.currentDish.id == id)) {
-			//Remove info for old dish
-			this.currentDish.id = 0;
-			this.currentDish.title = 'Loading...';
-			this.currentDish.image = '';
-			this.currentDish.description = 'Loading...';
-			this.currentDish.ingredients = [];
-			this.getDishDetails(id).subscribe(data => {
-				this.currentDish.id = data.id;
-				this.currentDish.title = data.title;
-				this.currentDish.image = data.image;
-				this.currentDish.description = data.instructions;
-				this.currentDish.ingredients = data.extendedIngredients;
-
-				//Check if the current dish already is in the menu
-				if (this.menuIds.includes(this.currentDish.id)) {
-					this.currentDishInMenu = true;
-					console.log("The current dish was in the menu. ")
-				}
-				else {
-					this.currentDishInMenu = false;
-					console.log("The current dish was not in the menu. ")
-				}
-			}, error => {
-				console.log("Call for dish details failed. ")
-			});
-		}
-	}
-
-	getDishDetails(id) {
-		let httpOptions = { headers: new HttpHeaders({ 'X-Mashape-Key': apiKey }) }
-		let details_url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/".concat(id).concat("/information");
-		return this.http.get<any>(details_url, httpOptions)
-			.pipe(
-				catchError(this.handleError('getDishDetails()'))
-			);
-	}
-
-
-
 
 
 	/**

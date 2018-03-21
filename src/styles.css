@@ -5,6 +5,7 @@ body{
 
 .jumbotron{
     background-color: azure;
+    text-align: center;
 }
 
 footer{
@@ -13,4 +14,14 @@ footer{
     bottom: 0;
     width: 100%;
     background-color: azure;
+}
+
+h1{
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+h3{
+    text-align: center;
 }

@@ -1,14 +1,18 @@
 <div>
-  <h3>My Dinner Sidebar</h3>
-  <p>
-    <!-- 
+	<h3>My Dinner Sidebar</h3>
+	<p>
+		<!-- 
     We use two-way binding that modifys the number of guests directly in the model 
     This is very convenient when for quickly getting an interactive app. However, 
     if you want more control and data validation, you should still use instead
     the event handlers, e.g. (keyup)="setNumberOfGuests"
   -->
-    How many people needs feeding?
-    <input type="number" [(ngModel)]="dinnerService.numberOfGuests" (change)="newNumberOfGuests()">
-    <br> Total number of guests: {{dinnerService.numberOfGuests}}
-  </p>
+		How many people needs feeding?
+		<input type="number" [(ngModel)]="dinnerService.numberOfGuests" (change)="newNumberOfGuests()">
+		<br> Total number of guests: {{dinnerService.numberOfGuests}}
+	</p>
+		<b>Dish name</b>
+	<div *ngFor="let item of dinnerService.menu">
+		<p>{{item.title}}</p>
+	</div>
 </div>
