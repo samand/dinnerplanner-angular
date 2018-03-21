@@ -7,21 +7,3 @@ body{
     background-color: azure;
     text-align: center;
 }
-
-footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: azure;
-}
-
-h1{
-    text-align: center;
-}
-h2{
-    text-align: center;
-}
-h3{
-    text-align: center;
-}

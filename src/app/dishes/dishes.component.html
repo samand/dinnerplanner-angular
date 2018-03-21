@@ -1,21 +1,23 @@
-<h3>Dishes</h3>
-<input type="text" placeholder="Enter a food you would like" (keyup)="textChanged($event)">
-<select name="dishType" (change)="typeChanged($event.target.value)">
-	<option *ngFor="let dishType of dishTypes" [value]="dishType.apiName">{{dishType.displayName}}</option>
-</select>
-<button (click)="search()" >Search</button>
-
-<ul>
-	<div *ngIf="dishes" class="row">
-		<div *ngFor="let dish of dishes" class="col-xs-6 col-md-4 border" (click)="clickedDish(dish.id)" routerLink='/details'>
-			<h5>{{dish.title}}</h5>
-			<img src='{{"https://spoonacular.com/recipeImages/".concat(dish.id).concat("-240x150.jpg")}}' height="120" style="position:relative; bottom:5px;" >
-		</div>
+<div class="row">
+	<div class="col">
+		<h4>Dish search</h4>
+		<input type="text" placeholder="Search term" (keyup)="textChanged($event)">
+		<select name="dishType" (change)="typeChanged($event.target.value)">
+			<option *ngFor="let dishType of dishTypes" [value]="dishType.apiName">{{dishType.displayName}}</option>
+		</select>
+		<button class="btn btn-primary" type="button" (click)="search()">Search</button>
 	</div>
-	<div *ngIf="status == 'INITIAL'">
-		<em>Search for a dish! You'll probably find something yummy...</em>
+</div>
+<hr />
+<div *ngIf="dishes" class="row">
+	<div *ngFor="let dish of dishes" class="col-6 col-md-4 border" (click)="clickedDish(dish.id)" routerLink='/details'>
+		<h5>{{dish.title}}</h5>
+		<img src='{{"https://spoonacular.com/recipeImages/".concat(dish.id).concat("-240x150.jpg")}}' height="120" />
 	</div>
-	<div *ngIf="status == 'ERROR'">
-		<b>Failed to load data, plese try again</b>
-	</div>
-</ul>
+</div>
+<div *ngIf="status == 'INITIAL'">
+	<em>Search for a dish! You'll probably find something yummy...</em>
+</div>
+<div *ngIf="status == 'ERROR'">
+	<b>Failed to load data, plese try again</b>
+</div>
