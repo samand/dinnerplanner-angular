@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-8">
+        <h4>My dinner for {{dinnerService.numberOfGuests}} people</h4>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-primary" type="button" routerLink='/search'>Go back and edit dinner</button>
+    </div>
+</div>
+<hr>
+<div *ngFor='let item of dinnerService.menu'>
+    <div class="row">
+        <div class="col-md-2">
+            <img src='{{item.image}}'>
+        </div>
+        <div class="col-md-4">
+            <h3>{{item.title}}</h3>
+        </div>
+        <div class="col">
+            <p>{{item.description}}</p>
+        </div>
+    </div>
+    <hr>
+</div>

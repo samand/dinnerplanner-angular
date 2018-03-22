@@ -18,17 +18,7 @@ export class DinnerService {
 	currentDishId: number = 0;
 	menu = [];
 	menuIds = [];
-/*
-	//currentDishDetails: Dish = {
-		id: 0,
-		title: "",
-		image: "",
-		description: "",
-		ingredients: []
-	};
-*/
-
-
+	menuPricePerServing: number = 0; //Entered for single dish. Multiplied by number of guests for real number.
 	/*
 	NUMBER OF GUESTS
 	*/
@@ -81,6 +71,8 @@ export class DinnerService {
 			this.menuIds.push(dishDetails.id)
 			this.menu.push(newDish);
 			console.log("Dish wasn't in the menu. Added dish to menu. ");
+			//Update menu price
+			this.menuPricePerServing += dishDetails.price;
 		}
 	}
 
@@ -89,6 +81,8 @@ export class DinnerService {
 		if (this.isDishInMenu(dishId)) {
 			for (key in this.menu) {
 				if (this.menu[key].id == dishId) {
+					//Update menu price
+					this.menuPricePerServing -= this.menu[key].price;
 					this.menu.splice(key,1);
 				}
 			}

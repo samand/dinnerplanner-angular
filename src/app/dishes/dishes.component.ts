@@ -29,12 +29,8 @@ export class DishesComponent implements OnInit {
 		{ apiName: "drink", displayName: "Drink" }
 	]
 
-	// this is how we reference the service (i.e. our model)
 	constructor(public dinnerService: DinnerService) { }
 
-	// this method is called by Angular lifecycle when the 
-	// component is actually created
-	// that's a good place to call the API and get the data
 	ngOnInit() {
 	}
 
@@ -50,6 +46,7 @@ export class DishesComponent implements OnInit {
 		// when data is retrieved we update the component property 
 		// this will cause the component to re-render
 		this.dinnerService.getAllDishes(this.searchType,this.searchText).subscribe(dishes => {
+			console.log(dishes);
 			this.dishes = dishes
 			this.status = 'LOADED'
 		}, error => {

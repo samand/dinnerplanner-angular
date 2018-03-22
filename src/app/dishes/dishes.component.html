@@ -12,7 +12,7 @@
 <div *ngIf="dishes" class="row">
 	<div *ngFor="let dish of dishes" class="col-6 col-md-4 border" (click)="clickedDish(dish.id)" routerLink='/details'>
 		<h5>{{dish.title}}</h5>
-		<img src='{{"https://spoonacular.com/recipeImages/".concat(dish.id).concat("-240x150.jpg")}}' height="120" />
+		<img src='{{"https://spoonacular.com/recipeImages/".concat(dish.id).concat("-240x150.jpg")}}'>
 	</div>
 </div>
 <div *ngIf="status == 'INITIAL'">

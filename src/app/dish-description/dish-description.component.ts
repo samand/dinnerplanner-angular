@@ -19,7 +19,7 @@ export class DishDescriptionComponent implements OnInit {
 		ingredients: [],
 		price:0
 	};
-	ingredients=[];
+	ingredients: Array<{}>;
 	addOrRemoveText:string;
 	ngOnInit() {
 		//Update
@@ -32,7 +32,8 @@ export class DishDescriptionComponent implements OnInit {
 				this.dishDetails.description= data.instructions;
 				this.dishDetails.ingredients= data.extendedIngredients;
 				this.dishDetails.price	=	Math.round(data.pricePerServing);
-				console.log(this.dishDetails.ingredients);
+				this.ingredients = data.extendedIngredients;
+				console.log(data.image);
 
 				if (this.dinnerService.isDishInMenu(data.id)){
 					this.addOrRemoveText = "Remove from menu";

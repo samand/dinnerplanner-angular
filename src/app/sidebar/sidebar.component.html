@@ -14,12 +14,12 @@
     <div class="col-md-8"><strong>Dish name</strong></div>
     <div class="col-md-4"><strong>Price</strong></div>
 </div>
-<div class="row" *ngFor="let item of dinnerService.menu">
+<div *ngFor='let item of dinnerService.menu' class="row" >
     <div class="col-8">
         <p>{{item.title}}</p>
     </div>
     <div class="col-4">
-        <p>{{item.price}}</p>
+        <p>{{item.price*dinnerService.numberOfGuests}}</p>
     </div>
 </div>
 <div class="row">
@@ -27,7 +27,7 @@
 			<em>Price of menu</em>
 		</div>
 		<div class="col-md-4">
-				<p>9999</p>
+				<p>{{dinnerService.menuPricePerServing*dinnerService.numberOfGuests}} SEK</p>
 		</div>
 </div>
-<button class="btn btn-primary" type="button">Confirm dinner</button>
+<button class="btn btn-primary" type="button" routerLink='/overview'>Confirm dinner</button>

@@ -11,6 +11,8 @@ import { SelectDishComponent } from './select-dish/select-dish.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { DishDetailsComponent } from './dish-details/dish-details.component';
 import { DishDescriptionComponent } from './dish-description/dish-description.component';
+import { DinnerOverviewComponent } from './dinner-overview/dinner-overview.component';
+import { PrintoutViewComponent } from './printout-view/printout-view.component';
 import { DinnerService } from './dinner.service';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     DishesComponent,
     DishDetailsComponent,
     DishDescriptionComponent,
+    DinnerOverviewComponent,
+    PrintoutViewComponent,
   ],
   imports: [
     BrowserModule,

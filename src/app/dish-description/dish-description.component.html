@@ -9,15 +9,23 @@
 <hr />
 <div class="row">
 	<div class="col-md-6">
-		<img width="240" src='{{dishDetails.image}}' />
+		<img src='{{dishDetails.image}}' />
 		<p>{{dishDetails.description}}</p>
 		<hr />
 		<div class="row">
 			<div class="col-8">
-				<em>Price of dish</em>
+				<em>Price per serving</em>
 			</div>
 			<div class="col-4">
 				<p>{{dishDetails.price}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-8">
+				<em>Price for {{dinnerService.numberOfGuests}} people</em>
+			</div>
+			<div class="col-4">
+				<p>{{dishDetails.price*dinnerService.numberOfGuests}}</p>
 			</div>
 		</div>
 		<hr />
@@ -37,15 +45,17 @@
 				<strong>Ingredient</strong>
 			</div>
 		</div>
-		<div *ngIf="dishDetails.ingredients===[]" class="row">
-			<div class="col-3">
-				<p>Q</p>
-			</div>
-			<div class="col-3">
-				<p>U</p>
-			</div>
-			<div class="col-6">
-				<p>I</p>
+		<div *ngIf='ingredients'>
+			<div *ngFor='let ingr of ingredients' class="row">
+				<div class="col-3">
+					<p>{{ingr.amount}}</p>
+				</div>
+				<div class="col-3">
+					<p>{{ingr.unit}}</p>
+				</div>
+				<div class="col-6">
+					<p>{{ingr.name}}</p>
+				</div>
 			</div>
 		</div>
 	</div>
