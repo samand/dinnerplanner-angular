@@ -46,7 +46,6 @@ export class DishesComponent implements OnInit {
 		// when data is retrieved we update the component property 
 		// this will cause the component to re-render
 		this.dinnerService.getAllDishes(this.searchType,this.searchText).subscribe(dishes => {
-			console.log(dishes);
 			this.dishes = dishes
 			this.status = 'LOADED'
 		}, error => {
@@ -57,6 +56,6 @@ export class DishesComponent implements OnInit {
 
 	//CHOOSE A DISH
 	clickedDish(dishId){
-		this.dinnerService.newCurrentDish(dishId);
+		document.cookie='currentDish='.concat(String(dishId));
 	}
 }

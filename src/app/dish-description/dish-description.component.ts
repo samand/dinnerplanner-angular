@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DinnerService } from '../dinner.service';
 import { Dish } from '../dish';
 
@@ -21,11 +21,12 @@ export class DishDescriptionComponent implements OnInit {
 	};
 	ingredients: Array<{}>;
 	addOrRemoveText:string;
+	dishLoaded:Boolean;
 	ngOnInit() {
 		//Update
-		console.log(this.dishDetails.ingredients);
-		if (this.dinnerService.currentDishId){
-			this.dinnerService.getDishDetails(this.dinnerService.currentDishId).subscribe(data => {
+		this.dishLoaded=false;
+		if (this.getCookie("currentDish")){			
+			this.dinnerService.getDishDetails(this.getCookie("currentDish")).subscribe(data => {
 				this.dishDetails.id		=	data.id;
 				this.dishDetails.title	=	data.title;
 				this.dishDetails.image	=	data.image;
@@ -33,7 +34,7 @@ export class DishDescriptionComponent implements OnInit {
 				this.dishDetails.ingredients= data.extendedIngredients;
 				this.dishDetails.price	=	Math.round(data.pricePerServing);
 				this.ingredients = data.extendedIngredients;
-				console.log(data.image);
+				this.dishLoaded=true;
 
 				if (this.dinnerService.isDishInMenu(data.id)){
 					this.addOrRemoveText = "Remove from menu";
@@ -44,9 +45,14 @@ export class DishDescriptionComponent implements OnInit {
 			});
 		}
 	}
+	getCookie(name) {
+		let value = "; " + document.cookie;
+		let parts = value.split("; " + name + "=");
+		if (parts.length == 2) return parts.pop().split(";").shift();
+	  }
 
 	addOrRemove(dishDetails){
-		if(this.dinnerService.currentDishId){
+		if(this.dishLoaded){
 			if (this.dinnerService.isDishInMenu(dishDetails.id)){
 				this.dinnerService.removeDish(dishDetails.id);
 				this.addOrRemoveText = "Add to menu";

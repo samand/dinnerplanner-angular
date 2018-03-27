@@ -1,5 +1,4 @@
-
-		<!-- 
+<!-- 
     We use two-way binding that modifys the number of guests directly in the model 
     This is very convenient when for quickly getting an interactive app. However, 
     if you want more control and data validation, you should still use instead
@@ -8,13 +7,17 @@
 
 <h4>Menu information</h4>
 <em>How many guests will you have?</em>
-<input type="number" [(ngModel)]="dinnerService.numberOfGuests" (change)="newNumberOfGuests()"/>
+<input type="number" [(ngModel)]="dinnerService.numberOfGuests" (change)="newNumberOfGuests()" />
 <hr />
 <div class="row">
-    <div class="col-md-8"><strong>Dish name</strong></div>
-    <div class="col-md-4"><strong>Price</strong></div>
+    <div class="col-md-8">
+        <strong>Dish name</strong>
+    </div>
+    <div class="col-md-4">
+        <strong>Price</strong>
+    </div>
 </div>
-<div *ngFor='let item of dinnerService.menu' class="row" >
+<div *ngFor='let item of dinnerService.menu' class="row">
     <div class="col-8">
         <p>{{item.title}}</p>
     </div>
@@ -23,11 +26,11 @@
     </div>
 </div>
 <div class="row">
-		<div class="col-md-8">
-			<em>Price of menu</em>
-		</div>
-		<div class="col-md-4">
-				<p>{{dinnerService.menuPricePerServing*dinnerService.numberOfGuests}} SEK</p>
-		</div>
+    <div class="col-md-8">
+        <em>Price of menu</em>
+    </div>
+    <div class="col-md-4">
+        <p>{{dinnerService.menuPricePerServing*dinnerService.numberOfGuests}} SEK</p>
+    </div>
 </div>
 <button class="btn btn-primary" type="button" routerLink='/overview'>Confirm dinner</button>

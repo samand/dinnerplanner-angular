@@ -14,26 +14,32 @@ const apiKey = 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB';
 @Injectable()
 export class DinnerService {
 	constructor(private http: HttpClient) { }
-	numberOfGuests: number = 4;
-	currentDishId: number = 0;
+	numberOfGuests: number = Number(this.getCookie("numberOfGuests"));
 	menu = [];
 	menuIds = [];
 	menuPricePerServing: number = 0; //Entered for single dish. Multiplied by number of guests for real number.
-	/*
+	
+
+	getCookie(name) {
+		//Cannot handle associative arrays
+		let value = "; " + document.cookie;
+		let parts = value.split("; " + name + "=");
+		if (parts.length == 2) return parts.pop().split(";").shift();
+	  }
+	
+	  /*
 	NUMBER OF GUESTS
 	*/
 
 	setNumberOfGuests(newNumberOfGuests) {
 		this.numberOfGuests = newNumberOfGuests;
+		document.cookie='numberOfGuests='.concat(String(newNumberOfGuests));
 	}
 
 	/*
 	CURRENT DISH
 	*/
 
-	newCurrentDish(dishId){
-		this.currentDishId = dishId;
-	}
 
 	isDishInMenu(dishId){
 		if (this.menuIds.includes(dishId)){
@@ -65,7 +71,6 @@ export class DinnerService {
 				title: dishDetails.title,
 				image: dishDetails.image,
 				description: dishDetails.description,
-				ingredients: dishDetails.ingredients,
 				price: dishDetails.price
 			};
 			this.menuIds.push(dishDetails.id)
@@ -73,6 +78,11 @@ export class DinnerService {
 			console.log("Dish wasn't in the menu. Added dish to menu. ");
 			//Update menu price
 			this.menuPricePerServing += dishDetails.price;
+
+			document.cookie='menu='.concat(JSON.stringify(this.menu));
+			document.cookie='menuIds='.concat(JSON.stringify(this.menuIds));
+			document.cookie='menuPricePerServing='.concat(String(this.menuPricePerServing));
+
 		}
 	}
 
@@ -87,6 +97,9 @@ export class DinnerService {
 				}
 			}
 			this.menuIds.splice(this.menuIds.indexOf(dishId), 1);
+			document.cookie='menu='.concat(JSON.stringify(this.menu));
+			document.cookie='menuIds='.concat(JSON.stringify(this.menuIds));
+			document.cookie='menuPricePerServing='.concat(String(this.menuPricePerServing));
 		}
 		else {
 			console.log("Dish was not in menu. No dish was removed.");
